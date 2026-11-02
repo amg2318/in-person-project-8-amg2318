@@ -69,7 +69,8 @@ body {
   line-height: 1.6;
   color: var(--color-text-primary);
   background: var(--color-background);
-  /* TODO: Add smooth transition for theme switching */
+  transition: background-color var(--transition-slow),
+              color var(--transition-slow);
 }
 
 .container {
@@ -95,7 +96,20 @@ body {
   cursor: pointer;
   z-index: 1000;
   font-size: 1.5rem;
-  /* TODO: Add hover effect and transition */
+  transition: transform var(--transition-base), border-color var(--transition-base);
+}
+
+.theme-toggle:hover {
+  transform: rotate(180deg);
+  border-color: var(--color-primary);
+}
+
+@keyframes spin-once {
+  to { transform: rotate(360deg); }
+}
+
+.theme-toggle.spinning {
+  animation: spin-once var(--transition-slow) var(--ease-in-out);
 }
 
 /* Hide moon in light mode, sun in dark mode */

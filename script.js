@@ -6,9 +6,20 @@
 const themeToggle = document.querySelector('.theme-toggle');
 const root = document.documentElement;
 
-// TODO: Check for saved theme preference and apply it
+// Check for saved theme preference
+const currentTheme = localStorage.getItem('theme') || 'light';
+root.setAttribute('data-theme', currentTheme);
 
-// TODO: Add click event listener to toggle theme
+themeToggle.addEventListener('click', () => {
+  const newTheme = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+
+  root.setAttribute('data-theme', newTheme);
+  localStorage.setItem('theme', newTheme);
+
+  // One full spin, then back to normal (removed when the animation ends)
+  themeToggle.classList.add('spinning');
+  themeToggle.addEventListener('animationend', () => themeToggle.classList.remove('spinning'), { once: true });
+});
 
 // ==========================================
 // SMOOTH SCROLLING FOR NAVIGATION
